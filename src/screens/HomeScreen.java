@@ -1,34 +1,28 @@
 package screens;
 
-import components.HamburgerMenuIcon.HamburgerMenuIcon;
-import components.container.Container;
-import components.container.ContainerFactory;
-import components.search.SearchTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import components.container._container.ContainerFactory;
+import components.container.bottomBar.BottomBar;
+import components.container.leftBar.LeftBar;
+import components.container.mainContainer.MainContainer;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class HomeScreen {
     public static void build(Stage primaryStage) {
         // set the title of the window
-        primaryStage.setTitle("Contact Manager");
+        primaryStage.setTitle("MyContactsX");
 
         // create the root node
-        AnchorPane root = new AnchorPane();
+        AnchorPane root = new AnchorPane(); 
 
-        // create the scene
+        // create the scene 
         Scene scene = new Scene(root, 1200,768);
         
-        // set the min width and height of the window
+       // set the min width and height of the stage
         primaryStage.setMinWidth(1200);
         primaryStage.setMinHeight(768);
 
@@ -38,14 +32,17 @@ public class HomeScreen {
         // create container to be added to the grid
         ContainerFactory containerFactory = new ContainerFactory(scene);
 
-        Container mainContainer = containerFactory.getType("MAIN");
-        Container bottomContainer = containerFactory.getType("BOTTOM");
-        Container leftContainer = containerFactory.getType("LEFT");
+        // create the main container and render it
+        MainContainer mainContainer = (MainContainer) containerFactory.getType("MAIN");
+        mainContainer.render(scene, grid);
 
-        // add the containers to the grid
-        grid.add(mainContainer, 0, 0);
-        grid.add(bottomContainer, 0, 1);
-        grid.add(leftContainer, 1, 0, 1, 2);
+        // create the bottom container and render it
+        BottomBar bottomBar = (BottomBar) containerFactory.getType("BOTTOM");
+        bottomBar.render(scene, grid);
+
+        // create the left container and render it
+        LeftBar leftBar = (LeftBar) containerFactory.getType("LEFT");
+        leftBar.render(scene, grid);
 
         // Set the column and row constraints for the GridPane
         setConstraints(grid, scene);
@@ -67,58 +64,8 @@ public class HomeScreen {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // create the mainContainer components
-        drawComponentsMain(mainContainer, scene);
-
-        // create the bottomContainer components
-        // drawComponentsBottom(bottomContainer, scene);
-
-        // create the leftContainer components
-        // drawComponentsLeft(leftContainer, scene);
-
     }
 
-    public static void drawComponentsMain(Container mainContainer, Scene scene) {
-        // create the header HBox
-        HBox mainContainerHeader = new HBox();
-        mainContainerHeader.setPrefSize(scene.getWidth()*0.65, scene.getHeight()*0.1);
-        HBox iconButton = new HBox();
-        HBox searchField = new HBox();
-        
-        // create the hamburger menu icon
-        HamburgerMenuIcon hamburgerMenu = new HamburgerMenuIcon(FontAwesomeIcons.BARS, "3em", Color.BLACK);
-        FontAwesomeIcon hamburgerMenuIcon =  hamburgerMenu.build();
-        
-        // set margin for the hamburger menu icon
-        HBox.setMargin(hamburgerMenuIcon, new Insets(20, 10, 10, 15));
-
-        // add the hamburger menu icon to the iconButton HBox
-        iconButton.getChildren().add(hamburgerMenuIcon);
-
-        // add the iconButton HBox to the main container header HBox
-        mainContainerHeader.getChildren().add(iconButton);
-        
-        // create the search text field
-        SearchTextField searchTextField = new SearchTextField("Search", 250, 28);
-
-        // add the search text field to the searchField HBox
-        searchField.getChildren().add(searchTextField);
-
-        // add the searchField HBox to the main container header HBox
-        mainContainerHeader.getChildren().add(searchField);
-
-        // center the search text field in the header HBox
-        searchField.setAlignment(Pos.CENTER);    
-
-        // set the width of the header HBox relative to the width of the main container
-        mainContainerHeader.prefWidthProperty().bind(mainContainer.widthProperty());
-
-        // set the width of the search text field relative to the width of the header HBox
-        searchField.prefWidthProperty().bind(mainContainerHeader.widthProperty());
-
-        // add all the rows to the main container
-        mainContainer.getChildren().add(mainContainerHeader);
-    }
 
     public static void setConstraints(GridPane grid, Scene scene) {
         ColumnConstraints col1 = new ColumnConstraints();
