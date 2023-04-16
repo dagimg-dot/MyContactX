@@ -1,0 +1,16 @@
+/* import poppins */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+
+.button-style {
+    -fx-background-color: #9B9595; /* Green */
+    -fx-border: none;
+    -fx-background-radius: 15;
+    -fx-color: black;
+    -fx-text-align: center;
+    -fx-text-decoration: none;
+    -fx-display: inline-block;
+    -fx-font-size: 16px;
+    -fx-font-size: 20;
+    /* -fx-font-family: 'Poppins', sans-serif; */
+    -fx-text-fill: black;
+}
