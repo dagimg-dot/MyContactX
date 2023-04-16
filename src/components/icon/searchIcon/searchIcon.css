@@ -1,0 +1,9 @@
+.search-icon {
+    -fx-background-color: white;
+    background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    border-radius: 15;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
