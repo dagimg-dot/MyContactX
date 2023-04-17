@@ -5,7 +5,7 @@ import components.container._container.Container;
 import components.icon.HamburgerMenuIcon.HamburgerMenuController;
 import components.icon._icon.CustomIcon;
 import components.icon.searchIcon.SearchIconController;
-import components.search.SearchTextField;
+import components.searchtextfield.SearchTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.geometry.Insets;
