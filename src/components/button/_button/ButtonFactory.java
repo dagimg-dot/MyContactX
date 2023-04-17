@@ -1,7 +1,10 @@
 package components.button._button;
 
+import components.button.deleteButton.DeleteButtonController;
+import components.button.editButton.EditButtonController;
 import components.button.groupButton.GroupButtonController;
 import components.button.nameButton.NameButtonController;
+import components.button.newButton.NewButtonController;
 import components.button.phoneButton.PhoneButtonController;
 import javafx.scene.control.Button;
 
@@ -32,7 +35,12 @@ public class ButtonFactory {
             button.setOnAction(e -> (new PhoneButtonController()).onClick());
         } else if(buttonText.equalsIgnoreCase("Group")) {
             button.setOnAction(e -> (new GroupButtonController()).onClick());
-        }
-        
+        } else if(buttonText.equalsIgnoreCase("New")) {
+            button.setOnAction(e -> (new NewButtonController()).onClick());
+        } else if(buttonText.equalsIgnoreCase("Edit")) {
+            button.setOnAction(e -> (new EditButtonController()).onClick());
+        } else if(buttonText.equalsIgnoreCase("Delete")) {
+            button.setOnAction(e -> (new DeleteButtonController()).onClick());
+        }        
     }
 }
