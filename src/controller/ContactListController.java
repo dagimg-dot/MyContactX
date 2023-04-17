@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Contact;
