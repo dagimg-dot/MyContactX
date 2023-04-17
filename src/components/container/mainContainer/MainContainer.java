@@ -12,6 +12,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -31,6 +33,7 @@ public class MainContainer extends Container{
         grid.add(this, 0, 0);
         VBox rows = new VBox(); 
         rows.setSpacing(5);
+        rows.prefHeightProperty().bind(this.heightProperty());
 
         // create the header HBox
         HBox mainContainerHeader = new HBox();
@@ -91,8 +94,9 @@ public class MainContainer extends Container{
 
         // create the titles HBox
         HBox titles = new HBox();
-        titles.setPrefSize(scene.getWidth()*0.55, scene.getHeight()*0.1);
-        
+        titles.prefWidthProperty().bind(this.widthProperty());
+        titles.setPadding(new Insets(0,0,10,0));
+
         // center the titles HBox vertically and horizontally
         titles.setAlignment(Pos.CENTER);
 
@@ -118,11 +122,47 @@ public class MainContainer extends Container{
         // add the buttons to the titles HBox
         titles.getChildren().addAll(nameButton, phoneButton, groupButton);
 
-        // add the header HBox and the titles HBox to the rows VBox
-        rows.getChildren().addAll(mainContainerHeader,titles);
+        // create the contacts list using scroll pane
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setStyle("-fx-background: #D9D9D9; -fx-border-color: #D9D9D9;-fx-background-radius: 15;");
+        
+        scrollPane.maxWidthProperty().bind(this.widthProperty());
 
+        VBox vbox = new VBox(); 
+        vbox.setSpacing(7);
+        vbox.setPadding(new Insets(0,5,5,15));
+        vbox.setStyle("-fx-background-radius: 15;");
+        
+        
+        // add some content to the VBox
+        for (int i = 1; i <= 50; i++) {
+            HBoxBuilder(vbox, scene,i,scrollPane);
+        }
+
+        // add the sample HBox to the scroll pane with a width of 100% and a height of 100%
+        scrollPane.setContent(vbox);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
+
+        // add the header HBox and the titles HBox to the rows VBox
+        rows.getChildren().addAll(mainContainerHeader,titles,scrollPane);
+        
         // add all the rows to the main container
         this.getChildren().add(rows);
 
     }
+    
+    public void HBoxBuilder(VBox vbox, Scene scene, int i,ScrollPane scrollPane) {
+        HBox hbox = new HBox();
+        hbox.setPrefSize(scene.getWidth() * 0.65, scene.getHeight() * 0.1);
+        hbox.setMaxWidth(scene.getWidth() * 0.65);
+        hbox.setMinHeight(scene.getHeight() * 0.06);
+        hbox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;");
+        hbox.setAlignment(Pos.CENTER);
+        hbox.getChildren().add(new Label("Label " + i));
+        hbox.maxWidthProperty().bind(vbox.widthProperty());
+        vbox.getChildren().add(hbox);
+    }
+
 }
