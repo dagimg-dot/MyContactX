@@ -1,9 +1,14 @@
 package components.button.newButton;
 
 import controller.Controller;
+import screens.HomeScreen;
 
 public class NewButtonController extends Controller {
+
     public void onClick() {
-       System.out.println("New button clicked");
+        // Test
+        System.out.println("New button clicked");
+
+        HomeScreen.showNewContactForm();
     }
 }
