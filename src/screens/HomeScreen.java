@@ -4,6 +4,7 @@ import components.container._container.ContainerFactory;
 import components.container.bottomBar.BottomBar;
 import components.container.leftBar.LeftBar;
 import components.container.mainContainer.MainContainer;
+import components.container.popUp.NewContactForm;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -12,6 +13,10 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 public class HomeScreen {
+    public static boolean isNewContactFormVisible = false;
+    public static boolean isEditContactFormVisible = false;
+    public static NewContactForm newContactForm;
+
     public static void build(Stage primaryStage) {
         // set the title of the window
         primaryStage.setTitle("MyContactsX");
@@ -57,14 +62,35 @@ public class HomeScreen {
         grid.setHgap(15);
         grid.setVgap(15);
 
+        // create a new contact form 
+        newContactForm = new NewContactForm(root, 450, 650);
+
         // Add the GridPane to the root
         root.getChildren().add(grid);
 
+        // render the new contact form and hide it
+        newContactForm.render();
+        newContactForm.setVisible(false);
+        
         // set the scene and show the stage
         primaryStage.setScene(scene);
         primaryStage.show();
 
     }
+
+    public static void showNewContactForm() {
+        if(isNewContactFormVisible == true && isEditContactFormVisible == false) {
+            newContactForm.setVisible(false);
+            isNewContactFormVisible = false;
+            return;
+        }
+        newContactForm.setVisible(true);
+        isNewContactFormVisible = true;
+    }
+
+    public static void showEditContactForm() {
+
+    }   
 
 
     public static void setConstraints(GridPane grid, Scene scene) {
