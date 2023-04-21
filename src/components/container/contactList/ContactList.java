@@ -53,9 +53,9 @@ public class ContactList {
 
         new TextGenerator();
 
-        Text nameText = TextGenerator.generateText(name, 16, "#000000","Times New Roman");
-        Text phoneText = TextGenerator.generateText(phone, 16, "#000000","Times New Roman");
-        Text groupText = TextGenerator.generateText(group, 16, "#000000","Times New Roman");
+        Text nameText = TextGenerator.generateText(name, 16, "#000000","Times New Roman","normal");
+        Text phoneText = TextGenerator.generateText(phone, 16, "#000000","Times New Roman","normal");
+        Text groupText = TextGenerator.generateText(group, 16, "#000000","Times New Roman","normal");
 
         // add the contact details to the HBoxes
         nameHBox.getChildren().add(nameText);
