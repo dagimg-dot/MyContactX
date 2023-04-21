@@ -1,6 +1,5 @@
 package controller;
 
-public class Controller {
-    public Controller() {
-    }
+public interface Controller {
+    public void onClick();
 }
