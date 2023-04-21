@@ -1,4 +1,4 @@
-package controller;
+package components.container.contactList;
 
 import java.util.ArrayList;
 
