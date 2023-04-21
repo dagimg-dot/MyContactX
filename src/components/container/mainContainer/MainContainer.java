@@ -3,15 +3,13 @@ package components.container.mainContainer;
 
 import components.button._button.ButtonFactory;
 import components.container._container.Container;
+import components.container.contactList.ContactList;
 import components.icon.HamburgerMenuIcon.HamburgerMenuController;
 import components.icon._icon.CustomIcon;
 import components.icon.searchIcon.SearchIconController;
 import components.searchtextfield.SearchTextField;
-import components.text.TextGenerator;
-import controller.ContactListController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,8 +19,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import models.Contact;
 
 public class MainContainer extends Container{
     public MainContainer(Scene scene, double widthPercentage, double heightPercentage) {
@@ -138,14 +134,10 @@ public class MainContainer extends Container{
         vbox.setPadding(new Insets(0,5,5,15));
         vbox.setStyle("-fx-background-radius: 15;");
 
-        // get contacts from the ContactListController
-        ObservableList<Contact> contacts = new ContactListController().showContactList(); 
+        // render the contacts list
+        ContactList contactList = new ContactList(this);
+        contactList.render(vbox, scene, scrollPane);
 
-        // add the list to the VBox by making each of them a HBox
-        for (Contact contact : contacts) {
-            HBoxBuilder(vbox, scene, contact, scrollPane);
-        }
-        
         // add the sample HBox to the scroll pane with a width of 100% and a height of 100%
         scrollPane.setContent(vbox);
         scrollPane.setFitToWidth(true);
@@ -158,67 +150,4 @@ public class MainContainer extends Container{
         this.getChildren().add(rows);
 
     }
-    
-    public void HBoxBuilder(VBox vbox, Scene scene,Contact contact,ScrollPane scrollPane) {
-        HBox mainHBox = new HBox();
-        
-        // set minHeight of the HBox relative to the height of the scene
-        mainHBox.setMinHeight(scene.getHeight() * 0.06);
-
-        // set style of the HBox
-        mainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;");
-        mainHBox.setAlignment(Pos.CENTER);
-        
-        // extract the contact details
-        String name = contact.getName();
-        String phone = contact.getPhone_no();
-        String group = contact.getGroup();
-        
-        // create the HBoxes for the contact details
-        HBox nameHBox = new HBox();
-        HBox phoneHBox = new HBox();
-        HBox groupHBox = new HBox();
-        
-        // style the contact details
-
-        new TextGenerator();
-
-        Text nameText = TextGenerator.generateText(name, 16, "#000000","Times New Roman");
-        Text phoneText = TextGenerator.generateText(phone, 16, "#000000","Times New Roman");
-        Text groupText = TextGenerator.generateText(group, 16, "#000000","Times New Roman");
-
-        // add the contact details to the HBoxes
-        nameHBox.getChildren().add(nameText);
-        phoneHBox.getChildren().add(phoneText);
-        groupHBox.getChildren().add(groupText);
-
-        // center the contact details in the HBoxes
-        nameHBox.setAlignment(Pos.CENTER); 
-        phoneHBox.setAlignment(Pos.CENTER);
-        groupHBox.setAlignment(Pos.CENTER);
-        
-        // create the titles HBox
-        mainHBox.prefWidthProperty().bind(this.widthProperty());
-        mainHBox.setPadding(new Insets(0,0,10,0));
-
-        // center the titles HBox vertically and horizontally
-        mainHBox.setAlignment(Pos.CENTER);
-        
-        // set the width of the buttons relative to the width of the titles HBox
-        nameHBox.prefWidthProperty().bind(mainHBox.widthProperty().divide(3));
-        phoneHBox.prefWidthProperty().bind(mainHBox.widthProperty().divide(3));
-        groupHBox.prefWidthProperty().bind(mainHBox.widthProperty().divide(3));
-
-        // make some space between the buttons
-        HBox.setMargin(nameHBox, new Insets( 0, 0, 0, 15));
-        HBox.setMargin(phoneHBox, new Insets( 0, 0, 0, 25));
-        HBox.setMargin(groupHBox, new Insets( 0, 15, 0, 25));
-
-        // add the buttons to the titles HBox
-        mainHBox.getChildren().addAll(nameHBox, phoneHBox, groupHBox);
-
-        // add the main HBox to the VBox
-        vbox.getChildren().add(mainHBox);   
-    }
-
-}
+}    
