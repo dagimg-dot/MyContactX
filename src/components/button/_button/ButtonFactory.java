@@ -1,11 +1,13 @@
 package components.button._button;
 
+import components.button.cancelButton.CancelButtonController;
 import components.button.deleteButton.DeleteButtonController;
 import components.button.editButton.EditButtonController;
 import components.button.groupButton.GroupButtonController;
 import components.button.nameButton.NameButtonController;
 import components.button.newButton.NewButtonController;
 import components.button.phoneButton.PhoneButtonController;
+import components.button.saveButton.SaveButtonController;
 import javafx.scene.control.Button;
 
 
@@ -47,6 +49,12 @@ public class ButtonFactory {
                break;
             case "Delete":
                button.setOnAction(e -> new DeleteButtonController().onClick());
+               break;
+            case "Save":
+               button.setOnAction(e -> new SaveButtonController().onClick());
+               break;
+            case "Cancel":
+               button.setOnAction(e -> new CancelButtonController().onClick());
                break;
             default:
                break;
