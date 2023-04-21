@@ -36,8 +36,7 @@ public class LeftBar extends Container{
         title.prefWidthProperty().bind(leftBarContainer.prefWidthProperty());
 
         // create the title text
-        new TextGenerator();
-        Text details = TextGenerator.generateText("Details", 20, "#000000", "Times New Roman");
+        Text details = TextGenerator.generateText("Details");
 
         // set the alignment of the title
         title.setAlignment(Pos.CENTER);
