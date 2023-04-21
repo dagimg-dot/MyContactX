@@ -1,0 +1,18 @@
+/* import poppins font */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+
+.search-text-field {
+    -fx-background-color: white;
+    background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    border-radius: 15;
+    -fx-font-size: 20;
+    font-size: 20;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-text-fill: #625E5E;
+    -fx-prompt-text-fill: #625E5E;
+    -fx-font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
