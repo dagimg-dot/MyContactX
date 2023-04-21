@@ -3,7 +3,7 @@ package components.button.newButton;
 import controller.Controller;
 import screens.HomeScreen;
 
-public class NewButtonController extends Controller {
+public class NewButtonController implements Controller {
 
     public void onClick() {
         // Test
