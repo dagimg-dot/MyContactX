@@ -29,18 +29,28 @@ public class ButtonFactory {
     }
 
     public void getType(String buttonText,Button button) {
-        if(buttonText.equalsIgnoreCase("Name")){
-            button.setOnAction(e -> (new NameButtonController()).onClick());
-        } else if(buttonText.equalsIgnoreCase("Phone No.")){
-            button.setOnAction(e -> (new PhoneButtonController()).onClick());
-        } else if(buttonText.equalsIgnoreCase("Group")) {
-            button.setOnAction(e -> (new GroupButtonController()).onClick());
-        } else if(buttonText.equalsIgnoreCase("New")) {
-            button.setOnAction(e -> (new NewButtonController()).onClick());
-        } else if(buttonText.equalsIgnoreCase("Edit")) {
-            button.setOnAction(e -> (new EditButtonController()).onClick());
-        } else if(buttonText.equalsIgnoreCase("Delete")) {
-            button.setOnAction(e -> (new DeleteButtonController()).onClick());
-        }        
+        switch(buttonText) {
+            case "Name":
+               button.setOnAction(e -> new NameButtonController().onClick());
+               break;
+            case "Phone No.":
+               button.setOnAction(e -> new PhoneButtonController().onClick());
+               break;
+            case "Group":
+               button.setOnAction(e -> new GroupButtonController().onClick());
+               break;
+            case "New":
+               button.setOnAction(e -> new NewButtonController().onClick());
+               break;
+            case "Edit":
+               button.setOnAction(e -> new EditButtonController().onClick());
+               break;
+            case "Delete":
+               button.setOnAction(e -> new DeleteButtonController().onClick());
+               break;
+            default:
+               break;
+         }
+            
     }
 }
