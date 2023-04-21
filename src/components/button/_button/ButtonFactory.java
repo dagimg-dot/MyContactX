@@ -15,7 +15,7 @@ public class ButtonFactory {
         button.setPrefSize(width, height);
         button.getStylesheets().add(stylePath);
         button.getStyleClass().add("button-style");
-        this.getType(buttonText, button);
+        this.setButtonAction(buttonText, button);
         return button;
     }
 
@@ -24,11 +24,11 @@ public class ButtonFactory {
         button.setPrefSize(width, height);
         button.getStylesheets().add("components/button/_button/buttonStyle.css");
         button.getStyleClass().add("button-style");
-        this.getType(buttonText, button);
+        this.setButtonAction(buttonText, button);
         return button;
     }
 
-    public void getType(String buttonText,Button button) {
+    public void setButtonAction(String buttonText,Button button) {
         switch(buttonText) {
             case "Name":
                button.setOnAction(e -> new NameButtonController().onClick());
