@@ -7,7 +7,12 @@ public class CancelButtonController implements Controller {
     public void onClick() {
         // Test
         System.out.println("Cancel button clicked");
-     
-        HomeScreen.showNewContactForm();
+
+        if(HomeScreen.isNewContactFormVisible) {
+            HomeScreen.showNewContactForm();
+        } 
+        else {
+            HomeScreen.showEditContactForm();
+        }
     }
 }
