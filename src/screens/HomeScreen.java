@@ -89,7 +89,10 @@ public class HomeScreen {
     }
 
     public static void showNewContactForm() {
-        if(isNewContactFormVisible == true && isEditContactFormVisible == false) {
+        if (isEditContactFormVisible) {
+            return;
+        }
+        if(isNewContactFormVisible) {
             newContactForm.setVisible(false);
             isNewContactFormVisible = false;
             return;
@@ -99,7 +102,10 @@ public class HomeScreen {
     }
 
     public static void showEditContactForm() {
-        if(isEditContactFormVisible == true && isNewContactFormVisible == false) {
+        if (isNewContactFormVisible) {
+            return;
+        }
+        if(isEditContactFormVisible) {
             editContactForm.setVisible(false);
             isEditContactFormVisible = false;
             return;

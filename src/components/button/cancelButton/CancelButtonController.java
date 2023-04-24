@@ -11,7 +11,7 @@ public class CancelButtonController implements Controller {
         if(HomeScreen.isNewContactFormVisible) {
             HomeScreen.showNewContactForm();
         } 
-        else {
+        else if(HomeScreen.isEditContactFormVisible){
             HomeScreen.showEditContactForm();
         }
     }
