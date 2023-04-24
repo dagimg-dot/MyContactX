@@ -11,15 +11,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class LeftBar extends Container{
+    public Scene scene;
+
     public LeftBar(Scene scene, double widthPercentage, double heightPercentage) {
         super(scene, widthPercentage, heightPercentage);
+        this.scene = scene;
         setPrefWidth(scene.getWidth() * widthPercentage);
         setPrefHeight(scene.getHeight() * heightPercentage);
         this.getStylesheets().add("components/container/_container/Container.css");
         this.getStyleClass().add("container");
     }
 
-    public void render(Scene scene, GridPane grid) { 
+    public void render(GridPane grid) { 
         grid.add(this, 1, 0, 1, 2);
 
 

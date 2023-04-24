@@ -41,15 +41,15 @@ public class HomeScreen {
 
         // create the main container and render it
         MainContainer mainContainer = (MainContainer) containerFactory.getType("MAIN");
-        mainContainer.render(scene, grid);
+        mainContainer.render(grid);
 
         // create the bottom container and render it
         BottomBar bottomBar = (BottomBar) containerFactory.getType("BOTTOM");
-        bottomBar.render(scene, grid);
+        bottomBar.render(grid);
 
         // create the left container and render it
         LeftBar leftBar = (LeftBar) containerFactory.getType("LEFT");
-        leftBar.render(scene, grid);
+        leftBar.render(grid);
 
         // Set the column and row constraints for the GridPane
         setConstraints(grid, scene);

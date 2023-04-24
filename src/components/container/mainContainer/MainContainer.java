@@ -21,8 +21,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class MainContainer extends Container{
+    public Scene scene;
     public MainContainer(Scene scene, double widthPercentage, double heightPercentage) {
         super(scene, widthPercentage, heightPercentage);
+        this.scene = scene;
         setPrefWidth(scene.getWidth() * widthPercentage);
         setPrefHeight(scene.getHeight() * heightPercentage);
         this.getStylesheets().add("components/container/_container/Container.css");
@@ -30,7 +32,7 @@ public class MainContainer extends Container{
     }
 
     
-    public void render(Scene scene, GridPane grid) {
+    public void render(GridPane grid) {
         grid.add(this, 0, 0);
         VBox rows = new VBox(); 
         rows.setSpacing(5);

@@ -10,15 +10,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class BottomBar extends Container {
+    public Scene scene;
+    
     public BottomBar(Scene scene, double widthPercentage, double heightPercentage) {
         super(scene, widthPercentage, heightPercentage);
+        this.scene = scene;
         setPrefWidth(scene.getWidth() * widthPercentage);
         setPrefHeight(scene.getHeight() * heightPercentage);
         this.getStylesheets().add("components/container/_container/Container.css");
         this.getStyleClass().add("container");
     }
 
-    public void render(Scene scene, GridPane grid) {
+    public void render(GridPane grid) {
         grid.add(this, 0, 1);
 
         HBox buttonContainer = new HBox();
