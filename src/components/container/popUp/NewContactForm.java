@@ -44,7 +44,6 @@ public class NewContactForm extends Container {
             // adjust pane layoutY property
             AnchorPane.setTopAnchor(this,((newVal.doubleValue() - this.getPrefHeight()) / 2));
         });
-        
     }
     
     public void render() {
