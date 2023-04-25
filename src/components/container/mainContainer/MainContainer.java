@@ -59,9 +59,12 @@ public class MainContainer extends Container{
         
         // create the search text field
         SearchTextField searchTextField = new SearchTextField("Search", 250, 28);
+        
+        // pass the search text field to the SearchIconController constructor
+        SearchIconController searchIconController = new SearchIconController(searchTextField);
 
         // create the search icon
-        CustomIcon search = new CustomIcon(FontAwesomeIcons.SEARCH, "1.5em", Color.valueOf("#625E5E"), new SearchIconController());
+        CustomIcon search = new CustomIcon(FontAwesomeIcons.SEARCH, "1.5em", Color.valueOf("#625E5E"), searchIconController);
         FontAwesomeIcon searchIcon =  search.build("search-icon");
         
         // wrap the search icon in an HBox
