@@ -46,9 +46,9 @@ public class CustomIcon {
         icon.setFill(this.color);
         icon.setIcon(this.icon);
         if (type.equalsIgnoreCase("hamburger-menu-icon")) {
-            icon.setOnMouseClicked(e -> ((HamburgerMenuController) this.controller).openMenu());
+            icon.setOnMouseClicked(e -> this.controller.onClick());
         } else if (type.equalsIgnoreCase("search-icon")) {
-            icon.setOnMouseClicked(e -> ((SearchIconController) this.controller).search());
+            icon.setOnMouseClicked(e -> this.controller.onClick());
         }
 
         return icon;
