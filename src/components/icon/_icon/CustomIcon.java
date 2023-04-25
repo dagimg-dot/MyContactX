@@ -1,7 +1,5 @@
 package components.icon._icon;
 
-import components.icon.HamburgerMenuIcon.HamburgerMenuController;
-import components.icon.searchIcon.SearchIconController;
 import controller.Controller;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
