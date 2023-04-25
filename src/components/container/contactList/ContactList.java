@@ -31,7 +31,7 @@ public class ContactList {
     
     public void HBoxBuilder(VBox vbox, Scene scene,Contact contact,ScrollPane scrollPane) {
         HBox mainHBox = new HBox();
-        
+
         // set minHeight of the HBox relative to the height of the scene
         mainHBox.setMinHeight(scene.getHeight() * 0.06);
 
@@ -50,18 +50,16 @@ public class ContactList {
         HBox groupHBox = new HBox();
         
         // style the contact details
-
-        new TextGenerator();
-
+        
         Text nameText = TextGenerator.generateText(name, 16, "#000000","Times New Roman","normal");
         Text phoneText = TextGenerator.generateText(phone, 16, "#000000","Times New Roman","normal");
         Text groupText = TextGenerator.generateText(group, 16, "#000000","Times New Roman","normal");
-
+        
         // add the contact details to the HBoxes
         nameHBox.getChildren().add(nameText);
         phoneHBox.getChildren().add(phoneText);
         groupHBox.getChildren().add(groupText);
-
+        
         // center the contact details in the HBoxes
         nameHBox.setAlignment(Pos.CENTER); 
         phoneHBox.setAlignment(Pos.CENTER);
@@ -70,7 +68,7 @@ public class ContactList {
         // create the titles HBox
         mainHBox.prefWidthProperty().bind(mainContainer.widthProperty());
         mainHBox.setPadding(new Insets(0,0,10,0));
-
+        
         // center the titles HBox vertically and horizontally
         mainHBox.setAlignment(Pos.CENTER);
         
@@ -78,14 +76,24 @@ public class ContactList {
         nameHBox.prefWidthProperty().bind(mainHBox.widthProperty().divide(3));
         phoneHBox.prefWidthProperty().bind(mainHBox.widthProperty().divide(3));
         groupHBox.prefWidthProperty().bind(mainHBox.widthProperty().divide(3));
-
+        
         // make some space between the buttons
         HBox.setMargin(nameHBox, new Insets( 0, 0, 0, 15));
         HBox.setMargin(phoneHBox, new Insets( 0, 0, 0, 25));
         HBox.setMargin(groupHBox, new Insets( 0, 15, 0, 25));
-
+        
         // add the buttons to the titles HBox
         mainHBox.getChildren().addAll(nameHBox, phoneHBox, groupHBox);
+        
+        mainHBox.setOnMouseClicked(e -> {
+            System.out.println("Hello");
+        });
+        
+        // bind a listener to the hbox generator
+        mainHBox.onMouseClickedProperty().addListener((obs,newVal,oldVal) -> {
+            mainHBox.setStyle("-fx-background-color: white;");
+        });
+        
 
         // add the main HBox to the VBox
         vbox.getChildren().add(mainHBox);   
