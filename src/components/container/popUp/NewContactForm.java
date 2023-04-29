@@ -1,20 +1,21 @@
 package components.container.popUp;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 import components.button._button.ButtonFactory;
-import components.button.newButton.NewButtonController;
+import components.button.saveButton.SaveButtonController;
 import components.container._container.Container;
 import components.icon._icon.CustomIcon;
 import components.text.TextGenerator;
+import components.textfield._textfield.TextFieldListener;
 import components.textfield.formfield.FormField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,8 +24,7 @@ import javafx.scene.text.Text;
 
 public class NewContactForm extends Container {
     public AnchorPane root;
-    public NewButtonController newButtonController;
-    public Map<String,TextField> textFields = new HashMap<>();
+    public Map<String, FormField> newContactFormFields = new HashMap<>();
 
     public NewContactForm(AnchorPane root, double formWidth, double formHeight) {
         super(root, formHeight, formHeight);
@@ -76,7 +76,7 @@ public class NewContactForm extends Container {
         // create 5 HBoxes for the form using the formRowBuilder method
         HBox name = formRowBuilder("Name");
         HBox email = formRowBuilder("Email");
-        HBox phone = formRowBuilder("Phone ");
+        HBox phone = formRowBuilder("Phone");
         HBox city = formRowBuilder("City");
         HBox group = formRowBuilder("Group");
 
@@ -84,10 +84,14 @@ public class NewContactForm extends Container {
         HBox buttonContainer = new HBox(20);
         buttonContainer.setPrefSize(this.getPrefWidth(), this.getPrefHeight() * 0.1);
 
+        // pass the newContactFormFields map to the save button constructor
+        SaveButtonController saveButtonController =  new SaveButtonController(newContactFormFields);
+    
+        // create button factory
         ButtonFactory buttonFactory = new ButtonFactory();
 
         // create save button and cancel button
-        Button saveButton = buttonFactory.createButton("Save", 85.0, 20.0);
+        Button saveButton = buttonFactory.createButton("Save", 85.0, 20.0, saveButtonController);
         Button cancelButton = buttonFactory.createButton("Cancel", 85.0, 20.0);
         
         // center the buttons
@@ -126,8 +130,11 @@ public class NewContactForm extends Container {
         // create textfield
         FormField componentTextField = new FormField(label);
 
+        // pass the textfield to the formfield listener
+        new TextFieldListener(componentTextField);
+
         // add textfield to the textfields map
-        textFields.put(label, componentTextField);
+        newContactFormFields.put(label, componentTextField);
 
         // add text and textfield to the name wrapper
         componentWrapper.getChildren().addAll(componentLabel, componentTextField);
