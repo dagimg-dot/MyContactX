@@ -1,6 +1,7 @@
 package components.container.mainContainer;
 
 
+import StateX.StateX;
 import components.button._button.ButtonFactory;
 import components.container._container.Container;
 import components.container.contactList.ContactList;
@@ -133,12 +134,14 @@ public class MainContainer extends Container{
         scrollPane.setStyle("-fx-background: #D9D9D9; -fx-border-color: #D9D9D9;-fx-background-radius: 15;");
         
         scrollPane.maxWidthProperty().bind(this.widthProperty());
-
-        VBox vbox = new VBox(); 
+    
+        // create the VBox that will contain the contacts list
+        VBox vbox = new VBox();
+        StateX.contactVBox = vbox; 
         vbox.setSpacing(7);
         vbox.setPadding(new Insets(0,5,5,15));
         vbox.setStyle("-fx-background-radius: 15;");
-
+        
         // render the contacts list
         ContactList contactList = new ContactList(this);
         contactList.render(vbox, scene, scrollPane);

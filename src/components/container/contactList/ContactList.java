@@ -2,6 +2,8 @@ package components.container.contactList;
 
 import components.container.mainContainer.MainContainer;
 import components.text.TextGenerator;
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import models.Contact;
+import StateX.StateX;
 
 public class ContactList {
     MainContainer mainContainer;
@@ -21,15 +24,39 @@ public class ContactList {
 
     public void render(VBox vbox, Scene scene, ScrollPane scrollPane) {
         // get contacts from the ContactListController
-        ObservableList<Contact> contacts = new ContactListController().showContactList(); 
+        ObservableList<Contact> contacts = new ContactListController().showContactList();
+        StateX.contacts = contacts; 
 
-        // add the list to the VBox by making each of them a HBox
+        // render the contacts
         for (Contact contact : contacts) {
-            HBoxBuilder(vbox, scene, contact, scrollPane);
+            int idx = contacts.indexOf(contact);
+            HBox hbox = HBoxBuilder(vbox, scene, contact, scrollPane,idx,contacts);
+            vbox.getChildren().add(hbox);
         }
+
+        // add a listener to the contacts list
+        contacts.addListener(new ListChangeListener<Contact>() {
+            @Override
+            public void onChanged(Change<? extends Contact> c) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // clear the vbox
+                        vbox.getChildren().clear();
+
+                        for (Contact contact : contacts) {
+                            int idx = contacts.indexOf(contact);
+                            HBox hbox = HBoxBuilder(vbox, scene, contact, scrollPane,idx,contacts);
+                            vbox.getChildren().add(hbox);
+                        }
+                    }
+                });
+            }
+        });
+        
     }
     
-    public void HBoxBuilder(VBox vbox, Scene scene,Contact contact,ScrollPane scrollPane) {
+    public HBox HBoxBuilder(VBox vbox, Scene scene,Contact contact,ScrollPane scrollPane,int idx, ObservableList<Contact> contacts) {
         HBox mainHBox = new HBox();
 
         // set minHeight of the HBox relative to the height of the scene
@@ -86,16 +113,25 @@ public class ContactList {
         mainHBox.getChildren().addAll(nameHBox, phoneHBox, groupHBox);
         
         mainHBox.setOnMouseClicked(e -> {
-            System.out.println("Hello");
+            // set the selectedContactIndex to the index of the contact that was clicked
+            if (StateX.selectedContactIndex == -1) {
+                mainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;-fx-border-color: #000000;-fx-border-radius: 15;");
+                StateX.selectedContactIndex = idx;
+                System.out.println(idx);
+            }
+            else {
+                HBox prevMainHBox = (HBox) vbox.getChildren().get(StateX.selectedContactIndex);
+                prevMainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;");
+                mainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;-fx-border-color: #000000;-fx-border-radius: 15;");
+                StateX.selectedContactIndex = idx;
+                System.out.println(idx);
+            }
         });
         
-        // bind a listener to the hbox generator
-        mainHBox.onMouseClickedProperty().addListener((obs,newVal,oldVal) -> {
-            mainHBox.setStyle("-fx-background-color: white;");
-        });
-        
+        // bind a listener to the click event of the mainHBox
 
         // add the main HBox to the VBox
-        vbox.getChildren().add(mainHBox);   
+        // vbox.getChildren().add(mainHBox); 
+        return mainHBox;  
     }
 }

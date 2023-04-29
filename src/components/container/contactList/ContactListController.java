@@ -11,8 +11,11 @@ public class ContactListController {
     }
 
     public ObservableList<Contact> showContactList() {
-        ArrayList<Contact> contactList = new Contact().getContactList();
+        new Contact();
+        ArrayList<Contact> contactList = Contact.getContactList();
+        
         ObservableList<Contact> contacts = FXCollections.observableArrayList(contactList);
+
         return contacts;
     }
 
