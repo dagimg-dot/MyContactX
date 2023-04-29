@@ -24,10 +24,15 @@ public class BottomBar extends Container {
     public void render(GridPane grid) {
         grid.add(this, 0, 1);
 
+        // create the button container
         HBox buttonContainer = new HBox();
 
+        // set the button container to the width and height of the left bar
         buttonContainer.prefWidthProperty().bind(this.widthProperty());
         buttonContainer.prefHeightProperty().bind(this.heightProperty());
+
+        // create button controllers
+        
 
         ButtonFactory buttonFactory = new ButtonFactory();
         // create the three buttons (new, edit, delete)
