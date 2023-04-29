@@ -7,7 +7,7 @@ import components.button.groupButton.GroupButtonController;
 import components.button.nameButton.NameButtonController;
 import components.button.newButton.NewButtonController;
 import components.button.phoneButton.PhoneButtonController;
-import components.button.saveButton.SaveButtonController;
+import controller.Controller;
 import javafx.scene.control.Button;
 
 
@@ -27,6 +27,16 @@ public class ButtonFactory {
         button.getStylesheets().add("components/button/_button/buttonStyle.css");
         button.getStyleClass().add("button-style");
         this.setButtonAction(buttonText, button);
+        return button;
+    }
+    
+    
+    public Button createButton (String buttonText, Double width, Double height,Controller controller) {
+        Button button = new Button(buttonText);
+        button.setPrefSize(width, height);
+        button.getStylesheets().add("components/button/_button/buttonStyle.css");
+        button.getStyleClass().add("button-style");
+        button.setOnAction(e -> controller.onClick());
         return button;
     }
 
@@ -49,9 +59,6 @@ public class ButtonFactory {
                break;
             case "Delete":
                button.setOnAction(e -> new DeleteButtonController().onClick());
-               break;
-            case "Save":
-               button.setOnAction(e -> new SaveButtonController().onClick());
                break;
             case "Cancel":
                button.setOnAction(e -> new CancelButtonController().onClick());
