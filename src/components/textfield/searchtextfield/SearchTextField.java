@@ -4,7 +4,6 @@ import components.textfield._textfield.CustomTextField;
 import javafx.geometry.Pos;
 
 public class SearchTextField extends CustomTextField {
-    public String currText;
     
     public SearchTextField(String promptText, double width, double height) {
         super(promptText);
@@ -14,11 +13,4 @@ public class SearchTextField extends CustomTextField {
         this.getStyleClass().add("search-text-field");
     }
 
-    public String getCurrText() {
-        return currText;
-    }
-
-    public void setCurrText(String currText) {
-        this.currText = currText;
-    }
 }

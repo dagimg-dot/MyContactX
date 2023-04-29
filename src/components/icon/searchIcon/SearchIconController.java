@@ -1,7 +1,7 @@
 package components.icon.searchIcon;
 
+import components.textfield._textfield.TextFieldListener;
 import components.textfield.searchtextfield.SearchTextField;
-import components.textfield.searchtextfield.SearchTextFieldListener;
 import controller.Controller;
 
 public class SearchIconController implements Controller {
@@ -11,7 +11,7 @@ public class SearchIconController implements Controller {
         this.searchTextField = searchTextField;
 
         // pass the this object to the SearchTextFieldListener
-        new SearchTextFieldListener(searchTextField);
+        new TextFieldListener(searchTextField);
     }
 
     public void onClick() {
@@ -20,7 +20,7 @@ public class SearchIconController implements Controller {
 
     public void search() { 
         // print what is written in the search text field
-        String currText = searchTextField.getCurrText();
+        String currText = searchTextField.getValue();
         System.out.println(currText);
     }
 }
