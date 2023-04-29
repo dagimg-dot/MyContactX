@@ -8,10 +8,10 @@ public class Contact {
     public String name;
     public String phone_no;
     public String group;
-    public ArrayList<Contact> contactList = new ArrayList<Contact>();   
+    public static ArrayList<Contact> contactList = new ArrayList<Contact>();   
 
     public Contact() {
-        this.contactList = new Database().fetchContacts();
+        contactList = new Database().fetchContacts();
     }
 
     public Contact(String name, String phone_no, String group) {
@@ -44,8 +44,12 @@ public class Contact {
         this.group = group;
     }
 
-    public ArrayList<Contact> getContactList() {
+    public static ArrayList<Contact> getContactList() {
         return contactList;
+    }
+
+    public static void addContact(Contact contact) {
+        contactList.add(contact);
     }
 
 }
