@@ -44,6 +44,7 @@ public class ContactList {
                         // clear the vbox
                         vbox.getChildren().clear();
 
+                        // re-render the contacts
                         for (Contact contact : contacts) {
                             int idx = contacts.indexOf(contact);
                             HBox hbox = HBoxBuilder(vbox, scene, contact, scrollPane,idx,contacts);
