@@ -4,27 +4,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 import components.button._button.ButtonFactory;
-import components.button.editButton.EditButtonController;
+import components.button.confirmButton.ConfirmButtonController;
 import components.container._container.Container;
 import components.icon._icon.CustomIcon;
 import components.text.TextGenerator;
+import components.textfield._textfield.TextFieldListener;
 import components.textfield.formfield.FormField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import StateX.StateX;
 
 public class EditContactForm extends Container {
     public AnchorPane root;
-    public EditButtonController editButtonController;
-    public Map<String,TextField> textFields = new HashMap<>();
+    public Map<String,FormField> editContactFormFields = new HashMap<>();
 
     public EditContactForm(AnchorPane root, double formWidth, double formHeight) {
         super(root, formHeight, formHeight);
@@ -76,7 +76,7 @@ public class EditContactForm extends Container {
         // create 5 HBoxes for the form using the formRowBuilder method
         HBox name = formRowBuilder("Name");
         HBox email = formRowBuilder("Email");
-        HBox phone = formRowBuilder("Phone ");
+        HBox phone = formRowBuilder("Phone");
         HBox city = formRowBuilder("City");
         HBox group = formRowBuilder("Group");
 
@@ -84,17 +84,26 @@ public class EditContactForm extends Container {
         HBox buttonContainer = new HBox(20);
         buttonContainer.setPrefSize(this.getPrefWidth(), this.getPrefHeight() * 0.1);
 
+        // pass the editContactFormFields map to the edit button controller
+        ConfirmButtonController confirmButtonController = new ConfirmButtonController(editContactFormFields);
+
+        // test 
+        // editContactFormFields.get("Name").setText("test");
+
+        // pass the editContactFormFields map to the global state
+        StateX.editContactFormFields = editContactFormFields;
+
         ButtonFactory buttonFactory = new ButtonFactory();
 
         // create save button and cancel button
-        Button saveButton = buttonFactory.createButton("Save", 85.0, 20.0);
+        Button confirmButton = buttonFactory.createButton("Save", 85.0, 20.0, confirmButtonController);
         Button cancelButton = buttonFactory.createButton("Cancel", 85.0, 20.0);
         
         // center the buttons
         buttonContainer.setAlignment(Pos.CENTER);
 
         // add save and cancel buttons to the button container
-        buttonContainer.getChildren().addAll(saveButton, cancelButton);
+        buttonContainer.getChildren().addAll(confirmButton, cancelButton);
 
 
         // add the header to the form container
@@ -126,8 +135,11 @@ public class EditContactForm extends Container {
         // create textfield
         FormField componentTextField = new FormField(label);
 
+        // pass the textfield to the form field listener
+        new TextFieldListener(componentTextField);
+
         // add textfield to the textfields map
-        textFields.put(label, componentTextField);
+        editContactFormFields.put(label, componentTextField);
 
         // add text and textfield to the name wrapper
         componentWrapper.getChildren().addAll(componentLabel, componentTextField);
