@@ -21,7 +21,7 @@ public class HomeScreen {
 
     public static void build(Stage primaryStage) {
         // set the title of the window
-        primaryStage.setTitle("MyContactsX");
+        primaryStage.setTitle("MyContactX");
 
         // create the root node
         AnchorPane root = new AnchorPane(); 
