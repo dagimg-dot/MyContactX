@@ -96,7 +96,7 @@ public class EditContactForm extends Container {
         ButtonFactory buttonFactory = new ButtonFactory();
 
         // create save button and cancel button
-        Button confirmButton = buttonFactory.createButton("Save", 85.0, 20.0, confirmButtonController);
+        Button confirmButton = buttonFactory.createButton("Confirm", 100.0, 20.0, confirmButtonController);
         Button cancelButton = buttonFactory.createButton("Cancel", 85.0, 20.0);
         
         // center the buttons
