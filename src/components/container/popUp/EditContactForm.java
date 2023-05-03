@@ -99,6 +99,7 @@ public class EditContactForm extends Container {
         Button confirmButton = buttonFactory.createButton("Confirm", 100.0, 20.0, confirmButtonController);
         Button cancelButton = buttonFactory.createButton("Cancel", 85.0, 20.0);
         
+        confirmButton.disableProperty().bind(editContactFormFields.get("Name").textProperty().isEmpty().or(editContactFormFields.get("Email").textProperty().isEmpty()).or(editContactFormFields.get("Phone").textProperty().isEmpty()).or(editContactFormFields.get("City").textProperty().isEmpty()).or(editContactFormFields.get("Group").textProperty().isEmpty()));
         // center the buttons
         buttonContainer.setAlignment(Pos.CENTER);
 
@@ -134,6 +135,16 @@ public class EditContactForm extends Container {
 
         // create textfield
         FormField componentTextField = new FormField(label);
+
+        // restrict the textfield according to the label
+        if(label.equals("Phone")) {
+            componentTextField.setTextFormatter(componentTextField.formatter("[0-9]*"));
+        } else if(label.equals("Email")) {
+            componentTextField.setTextFormatter(componentTextField.formatter("[a-zA-Z0-9@.]*"));
+        }
+        else {
+            componentTextField.setTextFormatter(componentTextField.formatter("[a-zA-Z ]*"));
+        }
 
         // pass the textfield to the form field listener
         new TextFieldListener(componentTextField);
