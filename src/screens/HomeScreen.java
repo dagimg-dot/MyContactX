@@ -88,30 +88,36 @@ public class HomeScreen {
 
     }
 
+    public static void hideNewContactForm() {
+        newContactForm.setVisible(false);
+        isNewContactFormVisible = false;
+    }
+
+    public static void hideEditContactForm() {
+        editContactForm.setVisible(false);
+        isEditContactFormVisible = false;
+    }
+
     public static void showNewContactForm() {
         if (isEditContactFormVisible) {
             return;
         }
-        if(isNewContactFormVisible) {
-            newContactForm.setVisible(false);
-            isNewContactFormVisible = false;
+        if(!isNewContactFormVisible) {
+            newContactForm.setVisible(true);
+            isNewContactFormVisible = true;
             return;
         }
-        newContactForm.setVisible(true);
-        isNewContactFormVisible = true;
     }
 
     public static void showEditContactForm() {
         if (isNewContactFormVisible) {
             return;
         }
-        if(isEditContactFormVisible) {
+        if(!isEditContactFormVisible) {
             editContactForm.setVisible(false);
             isEditContactFormVisible = false;
             return;
         }
-        editContactForm.setVisible(true);
-        isEditContactFormVisible = true;
     }   
 
 
