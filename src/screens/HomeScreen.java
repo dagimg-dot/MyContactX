@@ -114,8 +114,8 @@ public class HomeScreen {
             return;
         }
         if(!isEditContactFormVisible) {
-            editContactForm.setVisible(false);
-            isEditContactFormVisible = false;
+            editContactForm.setVisible(true);
+            isEditContactFormVisible = true;
             return;
         }
     }   
