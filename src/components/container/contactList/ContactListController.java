@@ -1,14 +1,12 @@
 package components.container.contactList;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.HBox;
 import models.Contact;
 import StateX.StateX;
-import components.textfield.formfield.FormField;
 
 public class ContactListController {
     public ContactListController() {
@@ -23,14 +21,14 @@ public class ContactListController {
         return contacts;
     }
 
-    public void addContact(Map<String, FormField> newContactFormFields) {
+    public void addContact() {
         System.out.println("Add Contact"); 
 
         // create a new contact
         Contact newContact = new Contact(
-            newContactFormFields.get("Name").value,
-            newContactFormFields.get("Phone").value,
-            newContactFormFields.get("Group").value          
+            StateX.newContactFormFields.get("Name").value,
+            StateX.newContactFormFields.get("Phone").value,
+            StateX.newContactFormFields.get("Group").value          
         );
         
         Contact.addContact(newContact);
@@ -66,6 +64,7 @@ public class ContactListController {
         // update the contact list
         Contact.getContactList().set(StateX.selectedContactIndex, selectedContact);
         StateX.contacts.set(StateX.selectedContactIndex, selectedContact);
+        StateX.selectedContactIndex = -1;
 
     }
 
