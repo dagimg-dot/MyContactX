@@ -12,4 +12,5 @@ public class StateX {
     public static VBox contactVBox;
     public static ObservableList<Contact> contacts;
     public static Map<String, FormField> editContactFormFields;
+    public static Map<String, FormField> newContactFormFields;
 }
