@@ -5,6 +5,7 @@ import java.util.Map;
 import components.container.contactList.ContactListController;
 import components.textfield.formfield.FormField;
 import controller.Controller;
+import screens.HomeScreen;
 
 public class ConfirmButtonController implements Controller {
     public Map<String, FormField> editContactFormFields;
@@ -25,6 +26,9 @@ public class ConfirmButtonController implements Controller {
         // call the ContactListController to update the contact list
         ContactListController contactListController = new ContactListController();
         contactListController.editContact();
+
+        // close the PopUp form when the confirm button is clicked
+        HomeScreen.hideEditContactForm();
 
     }
 }
