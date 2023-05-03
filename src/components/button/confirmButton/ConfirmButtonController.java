@@ -1,5 +1,6 @@
 package components.button.confirmButton;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import components.container.contactList.ContactListController;
@@ -25,7 +26,11 @@ public class ConfirmButtonController implements Controller {
 
         // call the ContactListController to update the contact list
         ContactListController contactListController = new ContactListController();
-        contactListController.editContact();
+        try {
+            contactListController.editContact();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // close the PopUp form when the confirm button is clicked
         HomeScreen.hideEditContactForm();

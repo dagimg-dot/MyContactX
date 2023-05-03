@@ -1,6 +1,8 @@
 package components.container.mainContainer;
 
 
+import java.sql.SQLException;
+
 import StateX.StateX;
 import components.button._button.ButtonFactory;
 import components.container._container.Container;
@@ -144,7 +146,11 @@ public class MainContainer extends Container{
         
         // render the contacts list
         ContactList contactList = new ContactList(this);
-        contactList.render(vbox, scene, scrollPane);
+        try {
+            contactList.render(vbox, scene, scrollPane);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // add the sample HBox to the scroll pane with a width of 100% and a height of 100%
         scrollPane.setContent(vbox);

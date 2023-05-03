@@ -13,6 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import models.Contact;
+
+import java.sql.SQLException;
+
 import StateX.StateX;
 
 public class ContactList {
@@ -22,7 +25,7 @@ public class ContactList {
         this.mainContainer = mainContainer;
     }
 
-    public void render(VBox vbox, Scene scene, ScrollPane scrollPane) {
+    public void render(VBox vbox, Scene scene, ScrollPane scrollPane) throws SQLException {
         // get contacts from the ContactListController
         ObservableList<Contact> contacts = new ContactListController().showContactList();
         StateX.contacts = contacts; 
@@ -129,10 +132,8 @@ public class ContactList {
             }
         });
         
-        // bind a listener to the click event of the mainHBox
 
         // add the main HBox to the VBox
-        // vbox.getChildren().add(mainHBox); 
         return mainHBox;  
     }
 }

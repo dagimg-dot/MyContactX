@@ -1,5 +1,6 @@
 package components.button.saveButton;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,11 @@ public class SaveButtonController implements Controller {
         
         // call the ContactListController to update the contact list
         ContactListController contactListController = new ContactListController();
-        contactListController.addContact();
+        try {
+            contactListController.addContact();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // clear the form fields
         newContactFormFields.forEach((key, value) -> {
