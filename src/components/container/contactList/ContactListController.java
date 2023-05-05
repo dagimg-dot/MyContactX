@@ -5,7 +5,12 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import models.Contact;
 import services.ContactService;
 import StateX.StateX;
@@ -97,6 +102,58 @@ public class ContactListController {
 
     public void searchContact() {
         System.out.println("Search Contact");
+    }
+
+    public void handleHBoxSelection(VBox vbox, HBox mainHBox,int idx) {
+        mainHBox.setOnMouseClicked(e -> {
+            if (StateX.selectedContactIndex == -1) {
+                mainHBox.setStyle("-fx-background-color: #6151C1;-fx-background-radius: 15; -fx-border-radius: 15;");
+                handleColorChange(mainHBox, Color.WHITE);
+                StateX.selectedContactIndex = idx;
+                System.out.println(idx);
+            }
+            else {
+                if(StateX.selectedContactIndex == idx) {
+                    mainHBox.setStyle("-fx-background-color: #E3E0E0;-fx-background-radius: 15;");
+                    handleColorChange(mainHBox, Color.valueOf("#554D4D"));
+                    StateX.selectedContactIndex = -1;
+                    System.out.println(idx);
+                    return;
+                }
+                HBox prevMainHBox = (HBox) vbox.getChildren().get(StateX.selectedContactIndex);
+                prevMainHBox.setStyle("-fx-background-color: #E3E0E0;-fx-background-radius: 15;");
+                handleColorChange(prevMainHBox, Color.valueOf("#554D4D"));
+                mainHBox.setStyle("-fx-background-color: #6151C1;-fx-background-radius: 15;-fx-text-fill: #white; -fx-border-radius: 15;");
+                handleColorChange(mainHBox, Color.WHITE);
+                StateX.selectedContactIndex = idx;
+                System.out.println(idx);
+            }
+        });
+    }
+
+    public void handleHBoxHover(HBox mainHBox) {
+        mainHBox.setOnMouseEntered(e -> {
+            if (StateX.selectedContactIndex == -1) {
+                mainHBox.setStyle("-fx-background-color: #E3E0E0;-fx-background-radius: 15;-fx-border-color: #6151C1; -fx-border-width:4px; -fx-border-radius: 15;");
+            }
+        });
+        mainHBox.setOnMouseExited(e -> {
+            if (StateX.selectedContactIndex == -1) {
+                mainHBox.setStyle("-fx-background-color: #E3E0E0;-fx-background-radius: 15;");
+            }
+        });
+    }
+
+    public void handleColorChange(HBox hbox,Paint color) {
+        for(Node node : hbox.getChildren()) {
+            if(node instanceof HBox) {
+                for(Node node2 : ((HBox) node).getChildren()) {
+                    if(node2 instanceof Text) {
+                        ((Text) node2).setFill(color);
+                    }
+                }
+            }
+        }
     }
 
 }

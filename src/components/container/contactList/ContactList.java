@@ -20,6 +20,7 @@ import StateX.StateX;
 
 public class ContactList {
     MainContainer mainContainer;
+    ContactListController contactListController;
 
     public ContactList(MainContainer mainContainer) {
         this.mainContainer = mainContainer;
@@ -27,7 +28,8 @@ public class ContactList {
 
     public void render(VBox vbox, Scene scene, ScrollPane scrollPane) throws SQLException {
         // get contacts from the ContactListController
-        ObservableList<Contact> contacts = new ContactListController().showContactList();
+        contactListController = new ContactListController();
+        ObservableList<Contact> contacts = contactListController.showContactList();
         StateX.contacts = contacts; 
 
         // render the contacts
@@ -67,8 +69,8 @@ public class ContactList {
         mainHBox.setMinHeight(scene.getHeight() * 0.06);
 
         // set style of the HBox
-        mainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;");
-        mainHBox.setAlignment(Pos.CENTER);
+        mainHBox.setStyle("-fx-background-color: #E3E0E0;-fx-background-radius: 15;");
+        // mainHBox.setAlignment(Pos.CENTER);
         
         // extract the contact details
         String name = contact.getName();
@@ -82,23 +84,27 @@ public class ContactList {
         
         // style the contact details
         
-        Text nameText = TextGenerator.generateText(name, 16, "#000000","Times New Roman","normal");
-        Text phoneText = TextGenerator.generateText(phone, 16, "#000000","Times New Roman","normal");
-        Text groupText = TextGenerator.generateText(group, 16, "#000000","Times New Roman","normal");
-        
+        Text nameText = TextGenerator.generateText(name,"Poppins-Regular", 18, "#554D4D");
+        Text phoneText = TextGenerator.generateText(phone,"Poppins-Regular", 18, "#554D4D");
+        Text groupText = TextGenerator.generateText(group,"Poppins-Regular", 18, "#554D4D");
+
         // add the contact details to the HBoxes
         nameHBox.getChildren().add(nameText);
         phoneHBox.getChildren().add(phoneText);
         groupHBox.getChildren().add(groupText);
         
         // center the contact details in the HBoxes
-        nameHBox.setAlignment(Pos.CENTER); 
-        phoneHBox.setAlignment(Pos.CENTER);
-        groupHBox.setAlignment(Pos.CENTER);
+        nameHBox.setAlignment(Pos.CENTER_LEFT); 
+        phoneHBox.setAlignment(Pos.CENTER_LEFT);
+        groupHBox.setAlignment(Pos.CENTER_LEFT);
+
+        // set padding for each HBox
+        nameHBox.setPadding(new Insets(0, 0, 0, 15));
+        phoneHBox.setPadding(new Insets(0, 0, 0, 15));
+        groupHBox.setPadding(new Insets(0, 0, 0, 15));
         
         // create the titles HBox
         mainHBox.prefWidthProperty().bind(mainContainer.widthProperty());
-        mainHBox.setPadding(new Insets(0,0,10,0));
         
         // center the titles HBox vertically and horizontally
         mainHBox.setAlignment(Pos.CENTER);
@@ -116,24 +122,14 @@ public class ContactList {
         // add the buttons to the titles HBox
         mainHBox.getChildren().addAll(nameHBox, phoneHBox, groupHBox);
         
-        mainHBox.setOnMouseClicked(e -> {
-            // set the selectedContactIndex to the index of the contact that was clicked
-            if (StateX.selectedContactIndex == -1) {
-                mainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;-fx-border-color: #000000;-fx-border-radius: 15;");
-                StateX.selectedContactIndex = idx;
-                System.out.println(idx);
-            }
-            else {
-                HBox prevMainHBox = (HBox) vbox.getChildren().get(StateX.selectedContactIndex);
-                prevMainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;");
-                mainHBox.setStyle("-fx-background-color: #D1C9C9;-fx-background-radius: 15;-fx-border-color: #000000;-fx-border-radius: 15;");
-                StateX.selectedContactIndex = idx;
-                System.out.println(idx);
-            }
-        });
-        
+        // set the selectedContactIndex to the index of the contact that was clicked
+        contactListController.handleHBoxSelection(vbox,mainHBox,idx);
+
+        // set the hover effect for the HBox
+        contactListController.handleHBoxHover(mainHBox);
 
         // add the main HBox to the VBox
         return mainHBox;  
     }
+
 }
