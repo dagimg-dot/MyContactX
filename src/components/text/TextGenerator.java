@@ -1,5 +1,7 @@
 package components.text;
 
+import assets.assetmanager.AssetManager;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class TextGenerator {
@@ -12,6 +14,13 @@ public class TextGenerator {
     public static Text generateText(String text) {
         Text _text = new Text(text);
         _text.setStyle("-fx-font-size: " + 20 + "px; -fx-color: " + "#000000" + "; -fx-font-family: " + "Times New Roman" + ";");
+        return _text;
+    }
+
+    public static Text generateText(String text, String fontName, int fontSize, String fontColor) {
+        Text _text = new Text(text);
+        _text.setFont(new AssetManager().getFont(fontName,fontSize));
+        _text.setFill(Color.valueOf(fontColor));
         return _text;
     }
 }

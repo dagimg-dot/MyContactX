@@ -29,7 +29,7 @@ public class LeftBar extends Container{
         VBox leftBarContainer = new VBox();
         leftBarContainer.prefWidthProperty().bind(this.widthProperty());
         leftBarContainer.prefHeightProperty().bind(this.heightProperty());
-        leftBarContainer.setStyle("-fx-background-color: #D9D9D9; -fx-background-radius: 15;");
+        leftBarContainer.setStyle("-fx-background-color: white; -fx-background-radius: 15;");
 
         
         HBox title = new HBox();
@@ -39,7 +39,7 @@ public class LeftBar extends Container{
         title.prefWidthProperty().bind(leftBarContainer.prefWidthProperty());
 
         // create the title text
-        Text details = TextGenerator.generateText("Details");
+        Text details = TextGenerator.generateText("Details","Poppins-SemiBold",20,"#554D4D");
 
         // set the alignment of the title
         title.setAlignment(Pos.CENTER);
@@ -51,7 +51,7 @@ public class LeftBar extends Container{
         VBox.setMargin(title, new Insets(10,10,10,10));
 
         // set the style of the title
-        title.setStyle("-fx-background-color: #9B9595; -fx-background-radius: 15;");
+        title.setStyle("-fx-background-color: #E3E0E0; -fx-background-radius: 15;");
 
         // add the title to the left bar container
         leftBarContainer.getChildren().addAll(title);
