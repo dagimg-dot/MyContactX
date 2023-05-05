@@ -95,8 +95,8 @@ public class NewContactForm extends Container {
         ButtonFactory buttonFactory = new ButtonFactory();
 
         // create save button and cancel button
-        Button saveButton = buttonFactory.createButton("Save", 85.0, 20.0, saveButtonController);
-        Button cancelButton = buttonFactory.createButton("Cancel", 85.0, 20.0);
+        Button saveButton = buttonFactory.createButton("Save", 100.0, 20.0, saveButtonController);
+        Button cancelButton = buttonFactory.createButton("Cancel", 100.0, 20.0);
 
         // Make the save button disabled by default and enable it when all the form fields are filled
         saveButton.disableProperty().bind(newContactFormFields.get("Name").textProperty().isEmpty().or(newContactFormFields.get("Email").textProperty().isEmpty()).or(newContactFormFields.get("Phone").textProperty().isEmpty()).or(newContactFormFields.get("City").textProperty().isEmpty()).or(newContactFormFields.get("Group").textProperty().isEmpty()));

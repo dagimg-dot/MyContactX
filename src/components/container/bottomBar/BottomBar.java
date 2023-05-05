@@ -1,5 +1,6 @@
 package components.container.bottomBar;
 
+import StateX.StateX;
 import components.button._button.ButtonFactory;
 import components.container._container.Container;
 import javafx.geometry.Insets;
@@ -36,9 +37,9 @@ public class BottomBar extends Container {
 
         ButtonFactory buttonFactory = new ButtonFactory();
         // create the three buttons (new, edit, delete)
-        Button newButton = buttonFactory.createButton("New", 100.0, 28.0);
-        Button editButton = buttonFactory.createButton("Edit", 100.0, 28.0);
-        Button deleteButton = buttonFactory.createButton("Delete", 100.0, 28.0);
+        Button newButton = buttonFactory.createButton("New", 100.0, 28.0,"components/button/_button/buttonStyle.css","button-style-bottombar");
+        Button editButton = buttonFactory.createButton("Edit", 100.0, 28.0,"components/button/_button/buttonStyle.css","button-style-bottombar");
+        Button deleteButton = buttonFactory.createButton("Delete", 100.0, 28.0,"components/button/_button/buttonStyle.css","button-style-bottombar");
 
         newButton.prefWidthProperty().bind(buttonContainer.widthProperty().divide(6));
         editButton.prefWidthProperty().bind(buttonContainer.widthProperty().divide(6));
@@ -56,5 +57,11 @@ public class BottomBar extends Container {
         this.getChildren().addAll(buttonContainer);
 
         buttonContainer.setAlignment(Pos.CENTER);
+
+        if(StateX.isDatabaseConnected == false) {
+            newButton.setDisable(true);
+            editButton.setDisable(true);
+            deleteButton.setDisable(true);
+        } 
     };
 }

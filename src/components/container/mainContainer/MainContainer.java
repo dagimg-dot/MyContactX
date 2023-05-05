@@ -48,7 +48,7 @@ public class MainContainer extends Container{
         HBox searchField = new HBox();
         
         // create the hamburger menu icon
-        CustomIcon hamburgerMenu = new CustomIcon(FontAwesomeIcons.BARS, "3em", Color.BLACK, new HamburgerMenuController());
+        CustomIcon hamburgerMenu = new CustomIcon(FontAwesomeIcons.BARS, "3em", Color.valueOf("#554D4D"), new HamburgerMenuController());
         FontAwesomeIcon hamburgerMenuIcon =  hamburgerMenu.build("hamburger-menu-icon");
 
         // set margin for the hamburger menu icon
@@ -67,7 +67,7 @@ public class MainContainer extends Container{
         SearchIconController searchIconController = new SearchIconController(searchTextField);
 
         // create the search icon
-        CustomIcon search = new CustomIcon(FontAwesomeIcons.SEARCH, "1.5em", Color.valueOf("#625E5E"), searchIconController);
+        CustomIcon search = new CustomIcon(FontAwesomeIcons.SEARCH, "1.5em", Color.valueOf("#554D4D"), searchIconController);
         FontAwesomeIcon searchIcon =  search.build("search-icon");
         
         // wrap the search icon in an HBox
@@ -113,9 +113,9 @@ public class MainContainer extends Container{
         // create the buttons
         ButtonFactory buttonFactory = new ButtonFactory();
         
-        Button nameButton = buttonFactory.createButton("Name", 210.0, 28.0);
-        Button phoneButton = buttonFactory.createButton("Phone No.", 210.0, 28.0);
-        Button groupButton = buttonFactory.createButton("Group", 210.0, 28.0);
+        Button nameButton = buttonFactory.createButton("Name", 210.0, 28.0,"components/button/_button/buttonStyle.css","button-style-title");
+        Button phoneButton = buttonFactory.createButton("Phone No.", 210.0, 28.0,"components/button/_button/buttonStyle.css","button-style-title");
+        Button groupButton = buttonFactory.createButton("Group", 210.0, 28.0,"components/button/_button/buttonStyle.css","button-style-title");
         
 
         // set the width of the buttons relative to the width of the titles HBox
@@ -133,7 +133,7 @@ public class MainContainer extends Container{
 
         // create the contacts list using scroll pane
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setStyle("-fx-background: #D9D9D9; -fx-border-color: #D9D9D9;-fx-background-radius: 15;");
+        scrollPane.setStyle("-fx-background: white; -fx-border-color: white;-fx-background-radius: 15; -fx-focus-color:transparent;");
         
         scrollPane.maxWidthProperty().bind(this.widthProperty());
     

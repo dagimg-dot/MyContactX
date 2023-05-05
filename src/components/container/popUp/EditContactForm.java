@@ -96,8 +96,8 @@ public class EditContactForm extends Container {
         ButtonFactory buttonFactory = new ButtonFactory();
 
         // create save button and cancel button
-        Button confirmButton = buttonFactory.createButton("Confirm", 100.0, 20.0, confirmButtonController);
-        Button cancelButton = buttonFactory.createButton("Cancel", 85.0, 20.0);
+        Button confirmButton = buttonFactory.createButton("Confirm", 110.0, 20.0, confirmButtonController);
+        Button cancelButton = buttonFactory.createButton("Cancel", 100.0, 20.0);
         
         confirmButton.disableProperty().bind(editContactFormFields.get("Name").textProperty().isEmpty().or(editContactFormFields.get("Email").textProperty().isEmpty()).or(editContactFormFields.get("Phone").textProperty().isEmpty()).or(editContactFormFields.get("City").textProperty().isEmpty()).or(editContactFormFields.get("Group").textProperty().isEmpty()));
         // center the buttons
