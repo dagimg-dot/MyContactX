@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import StateX.StateX;
 
 import models.Contact;
 
@@ -22,32 +23,42 @@ public class ContactService {
         return instance;
     }
 
+
     public ArrayList<Contact> fetchContacts() throws SQLException {
         ArrayList<Contact> contacts = new ArrayList<>();
+        
 
         connection = Database.getConnection();
 
-        String query = "SELECT * FROM contact";
-        PreparedStatement statement = connection.prepareStatement(query);
+        System.out.println(connection);
 
-        ResultSet resultSet = statement.executeQuery();
-
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String phone = resultSet.getString("phone");
-            String city = resultSet.getString("city");
-            String group = resultSet.getString("groupname");
-
-            Contact contact = new Contact(id,name, email, phone, city, group);
-            contacts.add(contact);
+        if(connection != null) {
+            StateX.isDatabaseConnected = true;
+            String query = "SELECT * FROM contact";
+            PreparedStatement statement = connection.prepareStatement(query);
+    
+    
+            ResultSet resultSet = statement.executeQuery();
+    
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String phone = resultSet.getString("phone");
+                String city = resultSet.getString("city");
+                String group = resultSet.getString("groupname");
+    
+                Contact contact = new Contact(id,name, email, phone, city, group);
+                contacts.add(contact);
+            }
+    
+            resultSet.close();
+            statement.close();
+    
         }
-
-        resultSet.close();
-        statement.close();
-
+        
         return contacts;
+        
     }
 
     public void saveContact(Contact contact) throws SQLException {

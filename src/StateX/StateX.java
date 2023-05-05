@@ -13,4 +13,5 @@ public class StateX {
     public static ObservableList<Contact> contacts;
     public static Map<String, FormField> editContactFormFields;
     public static Map<String, FormField> newContactFormFields;
+    public static boolean isDatabaseConnected = false;
 }
