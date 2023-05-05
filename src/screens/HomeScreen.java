@@ -26,6 +26,9 @@ public class HomeScreen {
         // create the root node
         AnchorPane root = new AnchorPane(); 
 
+        // fill the root node with a background color
+        root.setStyle("-fx-background-color: #DED9D9");
+
         // create the scene 
         Scene scene = new Scene(root, 1200,768);
         
