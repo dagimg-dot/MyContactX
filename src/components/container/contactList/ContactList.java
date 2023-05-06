@@ -12,6 +12,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import models.Contact;
 
 import java.sql.SQLException;
@@ -30,7 +32,18 @@ public class ContactList {
         // get contacts from the ContactListController
         contactListController = new ContactListController();
         ObservableList<Contact> contacts = contactListController.showContactList();
-        StateX.contacts = contacts; 
+        StateX.contacts = contacts;
+        
+        // if the contacts list is empty, show a message
+        if (contacts.isEmpty() && StateX.isDatabaseConnected == false) {
+            TextFlow text = new TextFlow();
+            Text text1 = TextGenerator.generateText("Contacts can not be displayed,", "Poppins-SemiBold",20, "#554D4D");
+            Text text2 = TextGenerator.generateText("since our database is not available", "Poppins-SemiBold",20, "#554D4D");
+            text.setTextAlignment(TextAlignment.CENTER);
+            text.getChildren().addAll(text1, new Text("\n"), text2);
+            vbox.getChildren().add(text);
+            return;
+        }
 
         // render the contacts
         for (Contact contact : contacts) {

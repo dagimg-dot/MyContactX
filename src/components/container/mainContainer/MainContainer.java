@@ -133,17 +133,15 @@ public class MainContainer extends Container{
 
         // create the contacts list using scroll pane
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setStyle("-fx-background: white; -fx-border-color: white;-fx-background-radius: 15; -fx-focus-color:transparent;");
+        scrollPane.setStyle("-fx-background: white; -fx-border-color: white;-fx-background-radius: 15; -fx-focus-color:transparent; -fx-faint-focus-color: transparent;");
         
         scrollPane.maxWidthProperty().bind(this.widthProperty());
-    
+        
         // create the VBox that will contain the contacts list
         VBox vbox = new VBox();
         StateX.contactVBox = vbox; 
         vbox.setSpacing(7);
         vbox.setPadding(new Insets(0,5,5,15));
-        vbox.setStyle("-fx-background-radius: 15;");
-        
         // render the contacts list
         ContactList contactList = new ContactList(this);
         try {
