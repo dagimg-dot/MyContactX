@@ -123,7 +123,7 @@ public class ContactListController {
                 HBox prevMainHBox = (HBox) vbox.getChildren().get(StateX.selectedContactIndex);
                 prevMainHBox.setStyle("-fx-background-color: #E3E0E0;-fx-background-radius: 15;");
                 handleColorChange(prevMainHBox, Color.valueOf("#554D4D"));
-                mainHBox.setStyle("-fx-background-color: #6151C1;-fx-background-radius: 15;-fx-text-fill: #white; -fx-border-radius: 15;");
+                mainHBox.setStyle("-fx-background-color: #6151C1;-fx-background-radius: 15;-fx-text-fill: white; -fx-border-radius: 15;");
                 handleColorChange(mainHBox, Color.WHITE);
                 StateX.selectedContactIndex = idx;
                 System.out.println(idx);
