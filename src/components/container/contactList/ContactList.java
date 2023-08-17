@@ -38,7 +38,7 @@ public class ContactList {
         if (contacts.isEmpty() && StateX.isDatabaseConnected == false) {
             TextFlow text = new TextFlow();
             Text text1 = TextGenerator.generateText("Contacts can not be displayed,", "Poppins-SemiBold",20, "#554D4D");
-            Text text2 = TextGenerator.generateText("since our database is not available", "Poppins-SemiBold",20, "#554D4D");
+            Text text2 = TextGenerator.generateText("Server is down", "Poppins-SemiBold",20, "#554D4D");
             text.setTextAlignment(TextAlignment.CENTER);
             text.getChildren().addAll(text1, new Text("\n"), text2);
             vbox.getChildren().add(text);
