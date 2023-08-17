@@ -4,4 +4,7 @@
 
 # Ignore compiled binary files
 bin/
+
+# Ignore dependencies
+lib/
             
